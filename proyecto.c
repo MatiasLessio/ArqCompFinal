@@ -458,7 +458,7 @@ char* Interaction(char* myurl, int var ){
 
 int main(){
     printf(" Me ejecute Main \n");
-        system("gpio -g mode 14 output");
+    system("gpio -g mode 14 output");
 	system("gpio -g mode 15 output");
 	system("gpio -g mode 18 output");
 	system("gpio -g mode 23 output");
