@@ -6,7 +6,7 @@
 #ifndef MAX  
 #define MAX 10000
 #endif
-char* Interaction( char* , int  );
+char* Interaction(char*,int);
 
 char* urlStart = {"https://api.telegram.org/bot5582079897:AAFZe2_lC268Djh6YzsAR-XJgt66--zNxDY/getUpdates"};
 char* urlEscuchar = {"https://api.telegram.org/bot5582079897:AAFZe2_lC268Djh6YzsAR-XJgt66--zNxDY/getUpdates?offset="};
