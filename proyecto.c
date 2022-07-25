@@ -17,7 +17,6 @@ char cadenaRemove[MAX];
 char cadenaRescri[MAX];
 char primera[MAX];
 char segunda[MAX];
-char cadenaRescri[MAX];
 
 int pines[]={14,15,18,23,24,25,8,7};
 long int GlobalID = 0;
