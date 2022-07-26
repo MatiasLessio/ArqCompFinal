@@ -7,7 +7,10 @@
 #define MAX 10000
 #endif
 char* Interaction(char*,int);
-
+extern void entrada1(void);
+extern void entrada2(void);
+extern void entrada3(void);
+extern void entrada4(void);
 char* urlStart = {"https://api.telegram.org/bot5582079897:AAFZe2_lC268Djh6YzsAR-XJgt66--zNxDY/getUpdates"};
 char* urlEscuchar = {"https://api.telegram.org/bot5582079897:AAFZe2_lC268Djh6YzsAR-XJgt66--zNxDY/getUpdates?offset="};
 char* urlHablar = {"https://api.telegram.org/bot5582079897:AAFZe2_lC268Djh6YzsAR-XJgt66--zNxDY/sendMessage?chat_id=1664067026&text="};
@@ -130,12 +133,12 @@ int convertir(char*caracteres ){
         auxiliar= (caracteres[i] - '0')*potencia;
         entero=entero+   auxiliar;
     }
-    return comoEntero;
+    return entero;
 }
 
 char* comandos(const char *s){
     const char *PATTERN1 = "text";
-    const char *PATTERN2 = "}}";
+    const char *PATTERN2 = ",";
     
 
     char *target = NULL;
@@ -243,7 +246,9 @@ char* getUpdateID(const char *s){
                         //GlobalID=GlobalID+1;
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha seleccionado el Semaforo de Carrera", '\0', MAX);
                         Interaction(cadena, 2);
-                        Luces("10000000");
+                        //Luces(funcion de Assembly)
+                        entrada4();
+                        /*Luces("10000000");
                         Luces("10100000"); 
                         Luces("10101000");
                         Luces("00000000");
@@ -255,7 +260,7 @@ char* getUpdateID(const char *s){
                         Luces("11111100");
                         Luces("11111110");
                         Luces("11111111");
-                        Luces("00000000");
+                        Luces("00000000");*/
 					}
                 if (comando[3]=='/' && comando[4]=='b' && comando[5]=='c'){
                         printf("comando /bc se ejecuto \n\n");
