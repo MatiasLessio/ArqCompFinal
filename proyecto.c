@@ -7,14 +7,19 @@
 #define MAX 10000
 #endif
 char* Interaction(char*,int);
-extern void entrada1(void);
-extern void entrada2(void);
-extern void entrada3(void);
-extern void entrada4(void);
+
 char* urlStart = {"https://api.telegram.org/bot5582079897:AAFZe2_lC268Djh6YzsAR-XJgt66--zNxDY/getUpdates"};
 char* urlEscuchar = {"https://api.telegram.org/bot5582079897:AAFZe2_lC268Djh6YzsAR-XJgt66--zNxDY/getUpdates?offset="};
 char* urlHablar = {"https://api.telegram.org/bot5582079897:AAFZe2_lC268Djh6YzsAR-XJgt66--zNxDY/sendMessage?chat_id=1664067026&text="};
 char cadena[MAX];
+
+extern void Semaforo();
+extern void Bateria();
+extern void OlaHumana();
+extern void Piedrita();
+extern void AutoFantastico();
+extern void Carrera();
+extern void Choque();
 
 char cadenaRemove[MAX];
 char cadenaRescri[MAX];
@@ -23,6 +28,20 @@ char segunda[MAX];
 
 int pines[]={14,15,18,23,24,25,8,7};
 long int GlobalID = 0;
+
+int bits[8];
+
+void Binario(int n){
+    int i=7;
+    while(i !=-1){
+        bits[i]=n%2;  
+        n=n/2; 
+        i=i-1;
+    }
+    for (int x = 0; x<8; x++){
+        digital(pines[x], bits[x]);
+    }
+}
 
 char* removerCaracteres(char* caracteres){
     for (int i=2; i<strlen(caracteres) ; i++){
@@ -42,27 +61,12 @@ void *concatenarString(void* restrict dst, const void* restrict src, int c, size
     return 0;
 }
 
-void Luces(char* num){
-    for (int i = 0; 8>i;i++) {
-		if (i>=8-strlen(num)){
-			if(num[strlen(num)-(8-i)]=='1'){
-				digital(pines[i],1);
-				
-			}
-			else{digital(pines[i],0);}
-		}
-		else{digital(pines[i],0);}
-	}
-    return;
-    }
-
 char* Reconvertir(int caracteres ){
     char aislado='0';
     int contador=0;
     char* Final="";
     while (caracteres>0)
     {
-        
         aislado = (caracteres%10)+'0' ;
         caracteres=caracteres/10 ;
         cadenaRescri[contador]=aislado;
@@ -137,29 +141,27 @@ int convertir(char*caracteres ){
 }
 
 char* comandos(const char *s){
-    const char *PATTERN1 = "text";
-    const char *PATTERN2 = ",";
-    
+    const char *DESDE_DONDE = "text";
+    const char *HASTA_DONDE1 = ","; //el DESDE y HASTA donde representan parte del objeto json que se forma
+    const char *HASTA_DONDE2 = "}}";
 
     char *target = NULL;
     char *start, *end;
 
-    if ( start = strstr( s, PATTERN1 ) )
+    if ( start = strstr( s, DESDE_DONDE ) )//busca palabras en el texto
     {
-        start += strlen( PATTERN1 );
-        if ( end = strstr( start, PATTERN2 ) )
+        start += strlen( DESDE_DONDE );//da la longitud de la palabra
+        if ( end = strstr( start, HASTA_DONDE1 ) || end = strstr( start, HASTA_DONDE2 ))
         {
-            target = ( char * )malloc( end - start + 1 );
+            target=malloc( end - start + 1 ); //reserva en memoria
             memcpy( target, start, end - start );
             target[end - start] = '\0';
         }
     }
     else{
-        //printf(" Error \n");
         return NULL;
 }
 	removerCaracteres(target); 
-	//printf(" comandosEXEC target %s\n",cadenaRemove);
     return target;
 }
 
@@ -183,8 +185,6 @@ char* getUpdateID(const char *s){
         }
     }
     printf(" target ID  --> %s\n", target );
-
-    //if ( target ) printf( "%s\n", target );
     
     removerCaracteres(target);
     char* TextGlobalID;
@@ -192,8 +192,6 @@ char* getUpdateID(const char *s){
     GlobalID = convertir(cadenaRemove);
     printf(" CONVERT ID --> %i\n\n", GlobalID);
     printf(" STRING ID  --> %s\n", cadenaRemove );
-    //printf(" CONVERT ID --> %s\n\n", GlobalID);
-    //printf(" CONVERT ID+1 --> %s\n\n", GlobalID+1);
     GlobalID=GlobalID+1;
     memset(cadenaRemove,0,MAX);
     Reconvertir(GlobalID);
@@ -233,133 +231,52 @@ char* getUpdateID(const char *s){
             memset(cadena,0,MAX);
             concatenarString(concatenarString(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX);
 			comando = Interaction(cadena, 3);
-            //printf(" Estoy2TextGlobalID  --> %s\n", TextGlobalID );
-            //printf(" Estoy2GlobalID  --> %i\n", GlobalID );
             printf(" comando  --> %s\n", comando );
 			if (comando != NULL){
                 GlobalID=GlobalID+1;
-                //printf(" ENTREEE  --> %s\n", comando );
                     if(comando[3]=='/' && comando[4]=='s' && comando[5]=='a'){
                     exit(0);}
 				if (comando[3]=='/' && comando[4]=='s' && comando[5]=='c'){
                         printf("comando /sc se ejecuto\n\n");
-                        //GlobalID=GlobalID+1;
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha seleccionado el Semaforo de Carrera", '\0', MAX);
                         Interaction(cadena, 2);
-                        //Luces(funcion de Assembly)
-                        entrada4();
-                        /*Luces("10000000");
-                        Luces("10100000"); 
-                        Luces("10101000");
-                        Luces("00000000");
-						Luces("10000000");
-                        Luces("11000000");
-                        Luces("11100000");
-                        Luces("11110000");
-                        Luces("11111000");
-                        Luces("11111100");
-                        Luces("11111110");
-                        Luces("11111111");
-                        Luces("00000000");*/
+                        Semaforo();
 					}
                 if (comando[3]=='/' && comando[4]=='b' && comando[5]=='c'){
                         printf("comando /bc se ejecuto \n\n");
-                        //GlobalID=GlobalID+1;
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Bateria Cargando", '\0', MAX);
                         Interaction(cadena, 2);
-						Luces("10000000");
-                        Luces("11000000");
-                        Luces("11100000");
-                        Luces("11110000");
-                        Luces("11111000");
-                        Luces("11111100");
-                        Luces("11111110");
-                        Luces("11111111");
-                        Luces("00000000");
+						Bateria();
 					}
                 if (comando[3]=='/' && comando[4]=='a' && comando[5]=='f'){
                         printf("comando /af se ejecuto \n\n");
-                        //GlobalID=GlobalID+1;
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado el Auto Fantástico", '\0', MAX);
                         Interaction(cadena, 2);
-						Luces("10000000");
-                        Luces("01000000");
-                        Luces("00100000");
-                        Luces("00010000");
-                        Luces("00001000");
-                        Luces("00000100");
-                        Luces("00000010");
-                        Luces("00000001");
-                        Luces("00000010");
-                        Luces("00000100");
-                        Luces("00001000");
-                        Luces("00010000");
-                        Luces("00100000");
-                        Luces("01000000");
-                        Luces("10000000");
-                        Luces("00000000");
+                        AutoFantastico();
 					}
                 if (comando[3]=='/' && comando[4]=='c' && comando[5]=='h'){
                         printf("comando /ch se ejecuto \n\n");
-                        //GlobalID=GlobalID+1;
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado el Choque", '\0', MAX);
                         Interaction(cadena, 2);
-						Luces("10000001");
-                        Luces("01000010");
-                        Luces("00100100");
-                        Luces("00011000");
-                        Luces("00100100");
-                        Luces("01000010");
-                        Luces("10000001");
-                        Luces("00000000");
+                        Choque();
 					}
                 if (comando[3]=='/' && comando[4]=='o' && comando[5]=='h'){
                         printf("comando /oh se ejecuto \n\n");
-                        //GlobalID=GlobalID+1;
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Ola Humana", '\0', MAX);
                         Interaction(cadena, 2);
-                        Luces("10000000");
-                        Luces("11000000");
-						Luces("11100000");
-                        Luces("01110000");
-                        Luces("00111000");
-                        Luces("00011100");
-                        Luces("00001110");
-                        Luces("00000111");
-                        Luces("00000011");
-                        Luces("00000001");
-                        Luces("00001110");
-                        Luces("00011100");
-                        Luces("00111000");
-                        Luces("01110000");
-                        Luces("11100000");
-                        Luces("11000000");
-                        Luces("10000000");
-                        Luces("00000000");
+                        OlaHumana();
 					}
                 if (comando[3]=='/' && comando[4]=='c' && comando[5]=='a'){
                         printf("comando /ca se ejecuto \n\n");
-                        //GlobalID=GlobalID+1;
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Carrera", '\0', MAX);
                         Interaction(cadena, 2);
-						Luces("10100000");
-                        Luces("00110000");
-                        Luces("00001000");
-                        Luces("00000110");
-                        Luces("00000010");
-                        Luces("00000001");
-                        Luces("00000000");
+                        Carrera();
 					}
                 if (comando[3]=='/' && comando[4]=='p' && comando[5]=='i'){
                         printf("comando /pi se ejecuto \n\n");
-                        //GlobalID=GlobalID+1;
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Piedrita", '\0', MAX);
                         Interaction(cadena, 2);
-						Luces("10000000");
-                        Luces("00100000");
-                        Luces("00001000");
-                        Luces("00000010");
-                        Luces("00000000");
+                        Piedrita();
 					}
                 memset(cadena,0,MAX);
                 memset(cadenaRescri,0,MAX);
@@ -368,7 +285,6 @@ char* getUpdateID(const char *s){
                 TextGlobalID=cadenaRescri;
 			}
 		}
-        Luces("");
     return target;
 }
 
@@ -418,25 +334,18 @@ char* Interaction(char* myurl, int var ){
     *
     * Do something nice with it!
     */
-   //printf(" COMMAND --> %i\n\n", var);
 	switch(var){
 		case 1: 
-                //printf(" SWITCH [1]: \n\n", strbuf.ptr);
                 getUpdateID(strbuf.ptr);
 				return " ";
 				break;
 		case 2: 
-                //printf(" SWITCH [2]: \n\n", strbuf.ptr);
                 return " ";
 				break;
-		case 3: //printf(" SWITCH [3]: \n\n", strbuf.ptr);
+		case 3: 
                 return comandos(strbuf.ptr);
 				break; 
 		}
-
-    //printf( "%s\n\n", strbuf.ptr );
-    //printf("%lu bytes retrieved\n", (unsigned long)strbuf.len);
-
     /* cleanup curl stuff */
     curl_easy_cleanup( curl );
     string_buffer_finish( &strbuf );
@@ -445,7 +354,6 @@ char* Interaction(char* myurl, int var ){
 }
 
 int main(){
-    printf(" Me ejecute Main \n");
     system("gpio -g mode 14 output");
 	system("gpio -g mode 15 output");
 	system("gpio -g mode 18 output");
@@ -455,6 +363,5 @@ int main(){
 	system("gpio -g mode 8 output");
 	system("gpio -g mode 7 output");
 	char* luz=Interaction(urlStart, 1);
-    printf(" Fin de la Ejecucion, \n");
     return 0;
 }
