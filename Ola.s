@@ -7,6 +7,7 @@ OlaHumana:
 			
 ForOlaHumana1:
 			MOV		r0, r4
+			BL		Binario
 			MOV		r4, r4, LSR #1
 			SUBS		r5, r5, #1
 			;CMP		r5,#0
@@ -17,6 +18,7 @@ ForOlaHumana1:
 			
 ForOlaHumana2:
 			MOV		r0, r4
+			BL		Binario
 			MOV		r4, r4, LSL #1
 			SUBS		r5, r5, #1
 			;CMP		r5,#0
