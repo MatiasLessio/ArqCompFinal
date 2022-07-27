@@ -34,13 +34,17 @@ int bits[8];
 void Binario(int n){
     int i=7;
     while(i !=-1){
+        if( n%2==0 ){bits[i] = '_';}
+		if( n%2==1 ){bits[i] = '*';}
         bits[i]=n%2;  
         n=n/2; 
         i=i-1;
     }
+    printf("\n");
     for (int x = 0; x<8; x++){
         digital(pines[x], bits[x]);
     }
+    printf("\n");
 }
 
 char* removerCaracteres(char* caracteres){
@@ -81,10 +85,11 @@ void digital(int pin, int estado){
 	Reconvertir(convertir(cadenaRescri));
 	concatenarString(concatenarString(primera, "gpio -g write ", '\0', MAX) - 1, cadenaRescri, '\0', MAX);
 	if (estado==1){
-		printf("1\n");
+		//printf("1\n");
 	concatenarString(concatenarString(segunda, primera, '\0', MAX) - 1, " 1", '\0', MAX);}
-	else{concatenarString(concatenarString(segunda, primera, '\0', MAX) - 1, " 0", '\0', MAX);
-		printf("0\n");
+	else{
+        concatenarString(concatenarString(segunda, primera, '\0', MAX) - 1, " 0", '\0', MAX);
+		//printf("0\n");
 		}
 	system(segunda);
 	memset(primera,0,MAX);
