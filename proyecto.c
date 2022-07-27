@@ -34,17 +34,13 @@ int bits[8];
 void Binario(int n){
     int i=7;
     while(i !=-1){
-        if( n%2==0 ){bits[i] = '_';}
-		if( n%2==1 ){bits[i] = '*';}
         bits[i]=n%2;  
         n=n/2; 
         i=i-1;
     }
-    printf("\n");
     for (int x = 0; x<8; x++){
         digital(pines[x], bits[x]);
     }
-    printf("\n");
 }
 
 char* removerCaracteres(char* caracteres){
