@@ -165,12 +165,9 @@ char* comandos(const char *s){
     return target;
 }
 
-char* getUpdateID(const char *s){   	
-    printf(" Me ejecute getUpdateID\n\n");
-
+char* getUpdateID(const char *s){   
     const char *PATTERN1 = "update_id";
     const char *PATTERN2 = ",";
-    
     char *target = NULL;
     char *start, *end;
 
@@ -184,30 +181,17 @@ char* getUpdateID(const char *s){
             target[end - start] = '\0';
         }
     }
-    printf(" target ID  --> %s\n", target );
-    
     removerCaracteres(target);
     char* TextGlobalID;
-    
     GlobalID = convertir(cadenaRemove);
-    printf(" CONVERT ID --> %i\n\n", GlobalID);
-    printf(" STRING ID  --> %s\n", cadenaRemove );
     GlobalID=GlobalID+1;
     memset(cadenaRemove,0,MAX);
     Reconvertir(GlobalID);
     Reconvertir(convertir(cadenaRescri));
     TextGlobalID=cadenaRescri;
-    printf(" STRING ID  --> %s\n", TextGlobalID );
-   
-    printf(" volvi del interaction\n\n");
     memset(cadena,0,MAX);
-    printf(" CADENA --> %s\n", cadena );
-   
     concatenarString(concatenarString(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX);
-    printf(" TextGlobalID --> %s\n", TextGlobalID );
-    printf(" CADENADES  --> %s\n", cadena );
     char* comando = Interaction(cadena, 3);
-    printf(" TextGlobalID --> %s\n", TextGlobalID );
     while (comando!=NULL)
     {
         memset(cadenaRescri,0,MAX);
@@ -221,7 +205,6 @@ char* getUpdateID(const char *s){
         printf(" EstoyGlobalID  --> %s\n", cadena );
         concatenarString(concatenarString(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX);
         memset(cadenaRemove,0,MAX);
-        
          comando = Interaction(cadena, 3);
          printf(" comando  --> %s\n", comando );
     }
