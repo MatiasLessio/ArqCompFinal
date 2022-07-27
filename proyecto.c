@@ -143,7 +143,6 @@ int convertir(char*caracteres ){
 char* comandos(const char *s){
     const char *DESDE_DONDE = "text";
     const char *HASTA_DONDE1 = ","; //el DESDE y HASTA donde representan parte del objeto json que se forma
-    const char *HASTA_DONDE2 = "}}";
 
     char *target = NULL;
     char *start, *end;
@@ -151,7 +150,7 @@ char* comandos(const char *s){
     if ( start = strstr( s, DESDE_DONDE ) )//busca palabras en el texto
     {
         start += strlen( DESDE_DONDE );//da la longitud de la palabra
-        if ( end = strstr( start, HASTA_DONDE1 ) || end = strstr( start, HASTA_DONDE2 ))
+        if ( end = strstr( start, HASTA_DONDE1 ))
         {
             target=malloc( end - start + 1 ); //reserva en memoria
             memcpy( target, start, end - start );
