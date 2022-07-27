@@ -10,7 +10,7 @@ ForCargadeChoque:
 				MOV		r0, r4
 				BL		Binario
 				ADD		r6, r6, #1  
-				CMP		r6, #6     
+				CMP		r6, #7     
 				BNE		ForCargadeChoque	
 				BL		Termino
 				
@@ -25,3 +25,4 @@ tabla:
 	.byte 0x18
 	.byte 0x24
 	.byte 0x42
+	.byte 0x81

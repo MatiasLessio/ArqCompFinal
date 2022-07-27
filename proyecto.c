@@ -240,42 +240,49 @@ char* getUpdateID(const char *s){
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha seleccionado el Semaforo de Carrera", '\0', MAX);
                         Interaction(cadena, 2);
                         Semaforo();
+                        Binario(0);
 					}
                 if (comando[3]=='/' && comando[4]=='b' && comando[5]=='c'){
                         printf("comando /bc se ejecuto \n\n");
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Bateria Cargando", '\0', MAX);
                         Interaction(cadena, 2);
 						Bateria();
+                        Binario(0);
 					}
                 if (comando[3]=='/' && comando[4]=='a' && comando[5]=='f'){
                         printf("comando /af se ejecuto \n\n");
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado el Auto Fantástico", '\0', MAX);
                         Interaction(cadena, 2);
                         AutoFantastico();
+                        Binario(0);
 					}
                 if (comando[3]=='/' && comando[4]=='c' && comando[5]=='h'){
                         printf("comando /ch se ejecuto \n\n");
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado el Choque", '\0', MAX);
                         Interaction(cadena, 2);
                         Choque();
+                        Binario(0);
 					}
                 if (comando[3]=='/' && comando[4]=='o' && comando[5]=='h'){
                         printf("comando /oh se ejecuto \n\n");
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Ola Humana", '\0', MAX);
                         Interaction(cadena, 2);
                         OlaHumana();
+                        Binario(0);
 					}
                 if (comando[3]=='/' && comando[4]=='c' && comando[5]=='a'){
                         printf("comando /ca se ejecuto \n\n");
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Carrera", '\0', MAX);
                         Interaction(cadena, 2);
                         Carrera();
+                        Binario(0);
 					}
                 if (comando[3]=='/' && comando[4]=='p' && comando[5]=='i'){
                         printf("comando /pi se ejecuto \n\n");
                         concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Piedrita", '\0', MAX);
                         Interaction(cadena, 2);
                         Piedrita();
+                        Binario(0);
 					}
                 memset(cadena,0,MAX);
                 memset(cadenaRescri,0,MAX);

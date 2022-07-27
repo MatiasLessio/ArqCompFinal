@@ -14,7 +14,7 @@ ForAuto1:
 			BNE		ForAuto1
 			
 			MOV		r4, #0x02
-			MOV		r5, #6
+			MOV		r5, #7
 			
 ForAuto2:
 			MOV		r0, r4
