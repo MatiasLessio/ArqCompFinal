@@ -7,7 +7,7 @@ AutoFantastico:
 			
 ForAuto1:
 			MOV		r0, r4
-			BL		Binario
+			BL		IntToBinario
 			MOV		r4, r4, LSR #1
 			SUBS		r5, r5, #1
 			;CMP		r5,#0
@@ -18,7 +18,7 @@ ForAuto1:
 			
 ForAuto2:
 			MOV		r0, r4
-			BL		Binario
+			BL		IntToBinario
 			MOV		r4, r4, LSL #1
 			SUBS		r5, r5, #1
 			;CMP		r5,#0

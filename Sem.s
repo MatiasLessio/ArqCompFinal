@@ -7,7 +7,7 @@ Semaforo:
 			
 ForSemaforo1:
 			MOV		r0, r4
-			BL 		Binario
+			BL 		IntToBinario
 			MOV		r4, r4, LSR #2 
 			ADD		r4,r4,#0x80
 			SUBS		r5, r5, #1
@@ -19,7 +19,7 @@ ForSemaforo1:
 			
 ForSemaforo2:
 			MOV		r0, r4
-			BL 		Binario
+			BL 		IntToBinario
 			MOV		r4, r4, LSR #1 
 			ADD		r4,r4,#0x80 
 			SUBS		r5, r5, #1

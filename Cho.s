@@ -8,7 +8,7 @@ Choque:
 ForCargadeChoque:
 				LDRB		r4, [r5, r6] 
 				MOV		r0, r4
-				BL		Binario
+				BL		IntToBinario
 				ADD		r6, r6, #1  
 				CMP		r6, #7     
 				BNE		ForCargadeChoque	
