@@ -11,4 +11,6 @@
 - sudo ./proyecto
 
 ## Para Interactuar con el Bot
-- El bot le mandará un mensaje para que el usuario elija algún comando disponible del menú. 
+- El bot le mandará un mensaje para que el usuario elija algún comando disponible del menú.
+## Donde Conectar
+- Conectar en los piner con la ubicacion: 8,10,12,16,18,22,24,26

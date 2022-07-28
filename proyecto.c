@@ -143,7 +143,7 @@ int convertir(char*caracteres ){
 
 char* comandos(const char *s){
     const char *DESDE_DONDE = "text";
-    const char *HASTA_DONDE1 = ","; //el DESDE y HASTA donde representan parte del objeto json que se forma
+    const char *HASTA_DONDE = ","; //el DESDE y HASTA donde representan parte del objeto json que se forma
 
     char *target = NULL;
     char *start, *end;
@@ -151,7 +151,7 @@ char* comandos(const char *s){
     if ( start = strstr( s, DESDE_DONDE ) )//busca palabras en el texto
     {
         start += strlen( DESDE_DONDE );//da la longitud de la palabra
-        if ( end = strstr( start, HASTA_DONDE1 ))
+        if ( end = strstr( start, HASTA_DONDE ))
         {
             target=malloc( end - start + 1 ); //reserva en memoria
             memcpy( target, start, end - start );
@@ -166,15 +166,15 @@ char* comandos(const char *s){
 }
 
 char* getUpdateID(const char *s){   
-    const char *PATTERN1 = "update_id";
-    const char *PATTERN2 = ",";
+    const char *DESDE_DONDE = "update_id";
+    const char *HASTA_DONDE = ",";
     char *target = NULL;
     char *start, *end;
 
-    if ( start = strstr( s, PATTERN1 ) )
+    if ( start = strstr( s, DESDE_DONDE ) )
     {
-        start += strlen( PATTERN1 );
-        if ( end = strstr( start, PATTERN2 ) )
+        start += strlen( DESDE_DONDE );
+        if ( end = strstr( start, HASTA_DONDE ) )
         {
             target = ( char * )malloc( end - start + 1 );
             memcpy( target, start, end - start );
