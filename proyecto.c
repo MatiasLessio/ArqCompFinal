@@ -50,18 +50,6 @@ char* removerCaracteres(char* caracteres){
     return cadenaRemove;
 }
 
-void *concatenarString(void* restrict dst, const void* restrict src, int c, size_t n){
-    //copia los caracteres de un puntero a otro hasta encontrar el carácter especificado
-    const char *s = src;
-    for (char *ret = dst; n; ++ret, ++s, --n)
-    {
-        *ret = *s;
-        if ((unsigned char)*ret == (unsigned char)c)
-            return ret + 1;
-    }
-    return 0;
-}
-
 char* IntToChar(int caracteres ){
     char aislado='0';
     int contador=0;
@@ -92,15 +80,12 @@ void EncenderLuces(int pin, int estado){
     memset(cadenaRescri,0,MAX);
 	IntToChar(pin);
 	IntToChar(CharToInt(cadenaRescri));
-	//concatenarString(concatenarString(primera, "gpio -g write ", '\0', MAX) - 1, cadenaRescri, '\0', MAX);
     memccpy(memccpy(primera, "gpio -g write ", '\0', MAX) - 1, cadenaRescri, '\0', MAX);
 	if (estado==1){
 		//printf("1\n");
-	//concatenarString(concatenarString(segunda, primera, '\0', MAX) - 1, " 1", '\0', MAX);
     memccpy(memccpy(segunda, primera, '\0', MAX) - 1, " 1", '\0', MAX);
     }
 	else{
-        //concatenarString(concatenarString(segunda, primera, '\0', MAX) - 1, " 0", '\0', MAX);
         memccpy(memccpy(segunda, primera, '\0', MAX) - 1, " 0", '\0', MAX);
 		//printf("0\n");
 		}
@@ -196,7 +181,6 @@ char* getUpdateID(const char *s){
     IntToChar(CharToInt(cadenaRescri));
     TextGlobalID=cadenaRescri;
     memset(cadena,0,MAX);
-    //concatenarString(concatenarString(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX);
     memccpy(memccpy(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX); //concatena
     char* comando = Interaction(cadena, 3);
     while (comando!=NULL)
@@ -207,19 +191,16 @@ char* getUpdateID(const char *s){
         IntToChar(GlobalID);
         IntToChar(CharToInt(cadenaRescri));
         TextGlobalID=cadenaRescri;
-        //concatenarString(concatenarString(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX);
         memccpy(memccpy(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX);
         memset(cadenaRemove,0,MAX);
          comando = Interaction(cadena, 3);
          printf(" comando  --> %s\n", comando );
     }
-    //concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Hola, Seleccione uno de los comandos disponibles", '\0', MAX);
     memccpy(memccpy(cadena, urlHablar, '\0', MAX) - 1, "Hola, Seleccione uno de los comandos disponibles", '\0', MAX);
 
     Interaction(cadena, 2);   
     while(comando != "/sa" || comando == NULL){
             memset(cadena,0,MAX);
-            //concatenarString(concatenarString(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX);
             memccpy(memccpy(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX);
 			comando = Interaction(cadena, 3);
             printf(" comando  --> %s\n", comando );
@@ -229,7 +210,6 @@ char* getUpdateID(const char *s){
                     exit(0);}
 				if (comando[3]=='/' && comando[4]=='s' && comando[5]=='c'){
                         printf("comando /sc se ejecuto\n\n");
-                        //concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha seleccionado el Semaforo de Carrera", '\0', MAX);
                         memccpy(memccpy(cadena, urlHablar, '\0', MAX) - 1, "Usted ha seleccionado el Semaforo de Carrera", '\0', MAX);
                         Interaction(cadena, 2);
                         Semaforo();
@@ -237,7 +217,6 @@ char* getUpdateID(const char *s){
 					}
                 if (comando[3]=='/' && comando[4]=='b' && comando[5]=='c'){
                         printf("comando /bc se ejecuto \n\n");
-                        //concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Bateria Cargando", '\0', MAX);
                         memccpy(memccpy(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Bateria Cargando", '\0', MAX);
                         Interaction(cadena, 2);
 						Bateria();
@@ -245,7 +224,6 @@ char* getUpdateID(const char *s){
 					}
                 if (comando[3]=='/' && comando[4]=='a' && comando[5]=='f'){
                         printf("comando /af se ejecuto \n\n");
-                        //concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado el Auto Fantástico", '\0', MAX);
                         memccpy(memccpy(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado el Auto Fantástico", '\0', MAX);
                         Interaction(cadena, 2);
                         AutoFantastico();
@@ -253,7 +231,6 @@ char* getUpdateID(const char *s){
 					}
                 if (comando[3]=='/' && comando[4]=='c' && comando[5]=='h'){
                         printf("comando /ch se ejecuto \n\n");
-                        //concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado el Choque", '\0', MAX);
                         memccpy(memccpy(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado el Choque", '\0', MAX);
                         Interaction(cadena, 2);
                         Choque();
@@ -261,7 +238,6 @@ char* getUpdateID(const char *s){
 					}
                 if (comando[3]=='/' && comando[4]=='o' && comando[5]=='h'){
                         printf("comando /oh se ejecuto \n\n");
-                        //concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Ola Humana", '\0', MAX);
                         memccpy(memccpy(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Ola Humana", '\0', MAX);
                         Interaction(cadena, 2);
                         OlaHumana();
@@ -269,7 +245,6 @@ char* getUpdateID(const char *s){
 					}
                 if (comando[3]=='/' && comando[4]=='c' && comando[5]=='a'){
                         printf("comando /ca se ejecuto \n\n");
-                        //concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Carrera", '\0', MAX);
                         memccpy(memccpy(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Carrera", '\0', MAX);
                         Interaction(cadena, 2);
                         Carrera();
@@ -277,7 +252,6 @@ char* getUpdateID(const char *s){
 					}
                 if (comando[3]=='/' && comando[4]=='p' && comando[5]=='i'){
                         printf("comando /pi se ejecuto \n\n");
-                        //concatenarString(concatenarString(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Piedrita", '\0', MAX);
                         memccpy(memccpy(cadena, urlHablar, '\0', MAX) - 1, "Usted ha selecionado la Piedrita", '\0', MAX);
                         Interaction(cadena, 2);
                         Piedrita();
