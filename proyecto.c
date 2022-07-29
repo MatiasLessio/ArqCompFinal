@@ -50,44 +50,15 @@ char* removerCaracteres(char* caracteres){
     return cadenaRemove;
 }
 
-char* IntToChar(int caracteres ){
-    char aislado='0';
-    int contador=0;
-    char* Final="";
-    while (caracteres>0)
-    {
-        aislado = (caracteres%10)+'0';
-        caracteres=caracteres/10 ;
-        cadenaRescri[contador]=aislado;
-        contador++;
-    }
-    return cadenaRescri;
-}
-
-int CharToInt(char*caracteres ){
-    int entero = 0;
-    int auxiliar=0;
-    int potencia=0;
-    for (int i=0; i< strlen(caracteres); i++){
-        potencia=pow(10,(strlen(caracteres)-i-1));
-        auxiliar= (caracteres[i] - '0')*potencia;
-        entero=entero+   auxiliar;
-    }
-    return entero;
-}
-
 void EncenderLuces(int pin, int estado){
     memset(cadenaRescri,0,MAX);
-	IntToChar(pin);
-	IntToChar(CharToInt(cadenaRescri));
+    sprintf(cadenaRescri, "%u", pin);
     memccpy(memccpy(primera, "gpio -g write ", '\0', MAX) - 1, cadenaRescri, '\0', MAX);
 	if (estado==1){
-		//printf("1\n");
-    memccpy(memccpy(segunda, primera, '\0', MAX) - 1, " 1", '\0', MAX);
+        memccpy(memccpy(segunda, primera, '\0', MAX) - 1, " 1", '\0', MAX);
     }
 	else{
         memccpy(memccpy(segunda, primera, '\0', MAX) - 1, " 0", '\0', MAX);
-		//printf("0\n");
 		}
 	system(segunda);
 	memset(primera,0,MAX);
@@ -103,8 +74,8 @@ string_buffer_t;
 
 static void string_buffer_initialize( string_buffer_t * sb ){
     sb->len = 0;
-    sb->ptr = malloc(sb->len+1); /* will be grown as needed by the realloc belove */
-    sb->ptr[0] = '\0'; /* no data at this point */
+    sb->ptr = malloc(sb->len+1);
+    sb->ptr[0] = '\0';
 }
 
 static void string_buffer_finish( string_buffer_t * sb ){
@@ -174,11 +145,10 @@ char* getUpdateID(const char *s){
     removerCaracteres(target);
     char* TextGlobalID;
     
-    GlobalID = CharToInt(cadenaRemove);
+    GlobalID = atoi(cadenaRemove);
     GlobalID=GlobalID+1;
     memset(cadenaRemove,0,MAX);
-    IntToChar(GlobalID);
-    IntToChar(CharToInt(cadenaRescri));
+    sprintf(cadenaRescri, "%u", GlobalID);
     TextGlobalID=cadenaRescri;
     memset(cadena,0,MAX);
     memccpy(memccpy(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX); //concatena
@@ -188,8 +158,7 @@ char* getUpdateID(const char *s){
         memset(cadenaRescri,0,MAX);
         memset(cadena,0,MAX);
         GlobalID=GlobalID+1;
-        IntToChar(GlobalID);
-        IntToChar(CharToInt(cadenaRescri));
+        sprintf(cadenaRescri, "%u", GlobalID);
         TextGlobalID=cadenaRescri;
         memccpy(memccpy(cadena, urlEscuchar, '\0', MAX) - 1, TextGlobalID, '\0', MAX);
         memset(cadenaRemove,0,MAX);
@@ -259,8 +228,7 @@ char* getUpdateID(const char *s){
 					}
                 memset(cadena,0,MAX);
                 memset(cadenaRescri,0,MAX);
-                IntToChar(GlobalID);
-                IntToChar(CharToInt(cadenaRescri));
+                sprintf(cadenaRescri, "%u", GlobalID);
                 TextGlobalID=cadenaRescri;
 			}
 		}
